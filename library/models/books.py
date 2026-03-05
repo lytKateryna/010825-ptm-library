@@ -1,6 +1,7 @@
 from datetime import date
 from django.core.validators import MaxValueValidator
 from django.db import models
+from library.models.publisher import Publisher
 
 
 class Book(models.Model):
@@ -21,3 +22,8 @@ class Book(models.Model):
     description: str = models.TextField(verbose_name="Описание книги", null=True, blank=True)
     genre: str = models.CharField(max_length=50, verbose_name="Жанр", choices=CHOICE_GENRE, default='N/A')
     pages: int = models.PositiveSmallIntegerField(validators=[MaxValueValidator(10000)], verbose_name="кол-во страниц", null=True, blank=True)
+    publisher = models.ForeignKey(Publisher,
+                                  on_delete=models.SET_NULL,
+                                  null=True,
+                                  related_name='books'
+                                  )
