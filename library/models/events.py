@@ -1,6 +1,5 @@
 from django.db import models
 
-from library.models.member import Member
 from library.models.books import Book
 from library.models.library import Library
 
@@ -23,7 +22,7 @@ class Event(models.Model):
 
 class EventParticipant(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='participants')
-    member = models.ManyToManyField(Member, related_name='events')
+    member = models.ManyToManyField('User', related_name='events')
     registration_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

@@ -1,4 +1,3 @@
-from datetime import date
 from django.core.validators import MaxValueValidator
 from django.db import models
 from library.models.publisher import Publisher
@@ -16,7 +15,7 @@ class Book(models.Model):
         ('Biography', 'Biography'),
     ]
 
-    name= models.CharField(max_length=100, verbose_name="Название книги")
+    name = models.CharField(max_length=100, verbose_name="Название книги")
 
     author = models.ForeignKey(
         to='Author',
@@ -63,6 +62,13 @@ class Book(models.Model):
         Publisher,
         on_delete=models.SET_NULL,
         null=True,
+        related_name='books'
+    )
+    owner = models.ForeignKey(
+        'User',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
         related_name='books'
     )
 

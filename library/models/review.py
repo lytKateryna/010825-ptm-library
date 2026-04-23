@@ -1,12 +1,11 @@
 from django.db import models
 
-from library.models.member import Member
 from library.models.books import Book
 
 
 class Review(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='reviews')
-    reviewer = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='reviews')
+    reviewer = models.ForeignKey('User', on_delete=models.CASCADE, related_name='reviews')
     rating = models.FloatField()
     description = models.TextField()
 

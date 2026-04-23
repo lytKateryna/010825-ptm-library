@@ -5,7 +5,7 @@ from django.db import models
 
 class Borrow(models.Model):
     member = models.ForeignKey(
-        "Member",
+        'User',
         verbose_name='Участник',
         on_delete=models.PROTECT,
         related_name='borrows',
